@@ -1,7 +1,7 @@
 package com.pawan.choure.Access.Default.Beverage;
 
 
-import Interview.General.Access.Default.Cert.Beverage;
+import  com.pawan.choure.Access.Default.Cert.Beverage;
 
 /**
  * Created by Pawan on 6/3/2016.

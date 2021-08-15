@@ -5,6 +5,10 @@ public class SynchroziedCompilation {
 		
 		String objectA=new String("PAWAN");
 		String objectB=new String("PAWAN");
+		Object o=null;
+		synchronized (o){
+
+		}
 		
 	}
 
