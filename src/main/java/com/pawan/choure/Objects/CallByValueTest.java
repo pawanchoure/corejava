@@ -1,5 +1,7 @@
 package com.pawan.choure.Objects;
 
+import java.util.Objects;
+
 /**
  * Created by Pawan on 13-06-2019.
  */
@@ -19,7 +21,7 @@ public class CallByValueTest {
        * Test 2: Methods can change the state of object parameters
        */
         System.out.println("\nTesting tripleSalary:");
-        Employee harry = new Employee("Harry", 50000);
+        EmployeeLocal harry = new EmployeeLocal("Harry", 50000);
         System.out.println("Before: salary=" + harry.getSalary());
         tripleSalary(harry);
         System.out.println("After: salary=" + harry.getSalary());
@@ -28,8 +30,8 @@ public class CallByValueTest {
        * Test 3: Methods can't attach new objects to object parameters
        */
         System.out.println("\nTesting swap:");
-        Employee a = new Employee("Alice", 70000);
-        Employee b = new Employee("Bob", 60000);
+        EmployeeLocal a = new EmployeeLocal("Alice", 70000);
+        EmployeeLocal b = new EmployeeLocal("Bob", 60000);
         System.out.println("Before: a=" + a.getName());
         System.out.println("Before: b=" + b.getName());
         swap(a, b);
@@ -50,15 +52,15 @@ public class CallByValueTest {
     }
 
 
-    public static void tripleSalary(Employee x) // works
+    public static void tripleSalary(EmployeeLocal x) // works
     {
         x.raiseSalary(200);
         System.out.println("End of method: salary=" + x.getSalary());
     }
 
-    public static void swap(Employee x, Employee y)
+    public static void swap(EmployeeLocal x, EmployeeLocal y)
     {
-        Employee temp = x;
+        EmployeeLocal temp = x;
         x = y;
         y = temp;
         System.out.println("End of method: x=" + x.getName());
@@ -66,12 +68,12 @@ public class CallByValueTest {
     }
 }
 
-class Employee // simplified Employee class
+class EmployeeLocal // simplified Employee class
 {
     private String name;
     private double salary;
 
-    public Employee(String n, double s)
+    public EmployeeLocal(String n, double s)
     {
         name = n;
         salary = s;
@@ -91,5 +93,19 @@ class Employee // simplified Employee class
     {
         double raise = salary * byPercent / 100;
         salary += raise;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeLocal employee = (EmployeeLocal) o;
+        return Double.compare(employee.salary, salary) == 0 &&
+                name.equals(employee.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, salary);
     }
 }
